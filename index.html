@@ -1,65 +1,115 @@
-<!DOCTYPE html>
-<html lang="en">
+
+!DOCTYPE html>
+
+<html lang="en-us">
 
 <head>
+  
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cloud Gifs</title>
-
-  <link rel="icon" type="image/png" href="assets/images/tinyimg5.png" />
-  <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Inknut Antiqua'>
-  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <title>Employee Tracker</title>
+  
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  
+  <!-- Firebase Reference -->
+  <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+  
+  <!-- Moment.js Reference -->
+  <!-- <script src="http://momentjs.com/downloads/moment.js"></script>   -->
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+  
 </head>
 
+<!-- NOTE: BORROWING FROM TIMESHEET EXERCISE TO BASE ON -->
+<!-- NOTE: BORROWING FROM TIMESHEET EXERCISE TO BASE ON -->
+<!-- NOTE: BORROWING FROM TIMESHEET EXERCISE TO BASE ON -->
 
-<body style="background: url(assets/images/aboveclouds.jpg); background-size: 100%">
-  <div id="cloudbox" style="background-color: rgba(255, 255, 255, 0.3)">
 
-    <!-- <center><img src="assets/images/tolkienmonograminring.jpg" id="monogram" /></center> -->
-    <center><h2>Cloud Gifs Galore</h2>
-
-    <div id="explanation">~ enjoy this peaceful gif-collection of clouds ~
-      <br>
-      ~ click on the type of cloud you would like to see ~
-      <br>
-      ~ ten clouds of that type will appear ~
-      <br>
-      ~ click on the cloud gifs to make them move ~
-      <br>
-      <br>
-    </div></center>
-
-<hr/>
- <!-- ____________ -->
-
+<body>
+  
+  <!-- Employee Tracker -->
   <div class="container">
-<center>    <h1>Cloud Search</h1>
-
-    <!-- Rendered Buttons will get Dumped Dere  -->
-    <div id="buttonholder"></div>
-    <br>
-
-    <form id="clouds-form">
-      <p>Type of the name a of a cloud you enjoy to add it to the list ~</p>
-      <label for="cloudyinput">Add a Beautiful Cloud, My Friend</label>
-      <input type="text" id="cloudyinput"> <input id="add-clouds" type="submit" value="Add the Cloud">
-    </form>
-    <br>
-  </center>
-
-    <!-- Clouds Get Dumped Dere -->
-    <div id="cloudcontainer"></div>
-
-
+    
+    <!-- Jumbotron -->
+    <div class="jumbotron" style="background-color: black; color: white">
+      <h1 class="text-center">Employee Data Management</h1>
+      <h3 class="text-center">A Comprehensive Directory of Employee Billable Hours</h3>
+    </div>
+    
+    <div class="row">
+      
+      <div class="col-lg-12">
+        
+        <!-- Current Employees-->
+        <div class="card card-primary">
+          <div class="card-heading">
+            <h3 class="card-title"><strong>Current Employees</strong></h3>
+          </div>
+          <div class="card-body">
+            <table class="table table-hover" id='employee-table'>
+              <thead>
+                <tr>
+                  <th>Employee Name</th>
+                  <th>Role</th>
+                  <th>Start Date</th>
+                  <th>Months Worked</th>
+                  <th>Monthly Rate ($)</th>
+                  <th>Total Billed ($)</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Add Employee  -->
+      <div class="card card-primary">
+        <div class="card-heading">
+          <h3 class="card-title"><strong>Add Employee</strong></h3>
+        </div>
+        <div class="card-body">
+          
+          <!-- Entry Form -->
+          <form>
+            <div class="form-group row">
+              <label for="employee-name-input">Employee Name</label>
+              <input class="form-control" id="employee-name-input" type="text">
+            </div>
+            <div class="form-group row">
+              <label for="role-input">Role</label>
+              <input class="form-control" id="role-input" type="text">
+            </div>
+            <div class="form-group row">
+              <label for="start-input">Start Date (DD/MM/YY - ex: 01/01/89)</label>
+              <input class="form-control" id="start-input" type="text">
+            </div>
+            <div class="form-group row">
+              <label for="rate-input">Monthly Rate</label>
+              <input class="form-control" id="rate-input" type="text">
+            </div>
+            <button class="btn btn-primary" id="add-employee-btn" type="submit">Submit</button>
+          </form>
+          
+        </div>
+        
+      </div>
+      
+    </div>
+    
   </div>
+  
+</div>
 
- <!-- ____________ -->
+</div>
 
+<!-- JavaScript -->
+<script src="assets/javascript/javascript.js"></script>
 
-  <script type="text/javascript" src="assets/javascript/javascript.js"></script>
 </body>
 
 </html>
+s
