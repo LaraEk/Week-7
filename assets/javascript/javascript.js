@@ -4,13 +4,16 @@
 
 
 // 1. Initialize Firebase
-var config = {
-    apiKey: "AIzaSyA_QypGPkcjPtylRDscf7-HQl8ribnFeIs",
-    authDomain: "time-sheet-55009.firebaseapp.com",
-    databaseURL: "https://time-sheet-55009.firebaseio.com",
-    storageBucket: "time-sheet-55009.appspot.com"
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCFgOGfsknFGfZrW0jjmkxsjROi9dbnGBg",
+    authDomain: "train-assignment-b31cc.firebaseapp.com",
+    databaseURL: "https://train-assignment-b31cc.firebaseio.com",
+    projectId: "train-assignment-b31cc",
+    storageBucket: "",
+    messagingSenderId: "222185742866"
   };
-  
   firebase.initializeApp(config);
   
   var database = firebase.database();
@@ -82,7 +85,7 @@ var config = {
     console.log(empBilled);
   
     // Add each train's data into the table
-    $("#employee-table > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" +
+    $("#train-table > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" +
     empStartPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td><td>" + empBilled + "</td></tr>");
   });
   
