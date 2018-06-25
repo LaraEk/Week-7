@@ -19,39 +19,39 @@
   var database = firebase.database();
   
   // 2. Button for adding Employees
-  $("#add-employee-btn").on("click", function(event) {
+  $("#add-train-btn").on("click", function(event) {
     event.preventDefault();
   
     // Grabs user input
     var trainName = $("#train-name-input").val().trim();
-    var empRole = $("#role-input").val().trim();
-    var empStart = moment($("#start-input").val().trim(), "DD/MM/YY").format("X");
+    var trainDest = $("#destination-input").val().trim();
+    var trainFirst = moment($("#first-train-input").val().trim(), "DD/MM/YY").format("X");
     var empRate = $("#rate-input").val().trim();
   
     // Creates local "temporary" object for holding employee data
-    var newEmp = {
-      name: empName,
-      role: empRole,
-      start: empStart,
+    var newTrain = {
+      name: trainName,
+      destination: trainDest,
+      first: trainFirst,
       rate: empRate
     };
   
     // Uploads employee data to the database
-    database.ref().push(newEmp);
+    database.ref().push(newTrain);
   
     // Logs everything to console
-    console.log(newEmp.name);
-    console.log(newEmp.role);
-    console.log(newEmp.start);
-    console.log(newEmp.rate);
+    console.log(newTrain.name);
+    console.log(newTrain.destination);
+    console.log(newTrain.first);
+    console.log(newTrain.rate);
   
     // Alert
-    alert("Employee successfully added");
+    alert("Train successfully added");
   
     // Clears all of the text-boxes
     $("#train-name-input").val("");
-    $("#role-input").val("");
-    $("#start-input").val("");
+    $("#destination-input").val("");
+    $("#first-train-input").val("");
     $("#rate-input").val("");
   });
   
@@ -61,23 +61,23 @@
     console.log(childSnapshot.val());
   
     // Store everything into a variable.
-    var empName = childSnapshot.val().name;
-    var empRole = childSnapshot.val().role;
-    var empStart = childSnapshot.val().start;
+    var trainName = childSnapshot.val().name;
+    var trainDest = childSnapshot.val().destination;
+    var trainFirst = childSnapshot.val().first;
     var empRate = childSnapshot.val().rate;
   
     // Employee Info
-    console.log(empName);
-    console.log(empRole);
-    console.log(empStart);
+    console.log(trainName);
+    console.log(trainDest);
+    console.log(trainFirst);
     console.log(empRate);
   
-    // Prettify the employee start
-    var empStartPretty = moment.unix(empStart).format("MM/DD/YY");
+    // Prettify the employee first
+    var trainFirstPretty = moment.unix(trainFirst).format("HH:mm");
   
     // Calculate the months worked using hardcore math
     // To calculate the months worked
-    var empMonths = moment().diff(moment(empStart, "X"), "months");
+    var empMonths = moment().diff(moment(trainFirst, "X"), "months");
     console.log(empMonths);
   
     // Calculate the total billed rate
@@ -85,13 +85,13 @@
     console.log(empBilled);
   
     // Add each train's data into the table
-    $("#train-table > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" +
-    empStartPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td><td>" + empBilled + "</td></tr>");
+    $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDest + "</td><td>" +
+    trainFirstPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td><td>" + empBilled + "</td></tr>");
   });
   
   // Example Time Math
   // -----------------------------------------------------------------------------
-  // Assume Employee start date of January 1, 2015
+  // Assume Employee first date of January 1, 2015
   // Assume current date is March 1, 2016
   
   // We know that this is 15 months.
