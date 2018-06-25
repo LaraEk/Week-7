@@ -1,3 +1,10 @@
 #schedulebox {
     background-color: rgb(208, 228, 245);
 }
+
+?
+/*this doesn't work */
+input[type=text] {
+    background-color: #3CBC8D;
+    color: white;
+}

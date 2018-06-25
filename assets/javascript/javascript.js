@@ -23,7 +23,7 @@
     event.preventDefault();
   
     // Grabs user input
-    var empName = $("#employee-name-input").val().trim();
+    var trainName = $("#train-name-input").val().trim();
     var empRole = $("#role-input").val().trim();
     var empStart = moment($("#start-input").val().trim(), "DD/MM/YY").format("X");
     var empRate = $("#rate-input").val().trim();
@@ -49,7 +49,7 @@
     alert("Employee successfully added");
   
     // Clears all of the text-boxes
-    $("#employee-name-input").val("");
+    $("#train-name-input").val("");
     $("#role-input").val("");
     $("#start-input").val("");
     $("#rate-input").val("");
