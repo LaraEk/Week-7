@@ -26,7 +26,7 @@
     var trainName = $("#train-name-input").val().trim();
     var trainDest = $("#destination-input").val().trim();
     var trainFirst = moment($("#first-train-input").val().trim(), "DD/MM/YY").format("X");
-    var trainFreq = $("#train-freq").val().trim();
+    var trainFreq = $("#freq-input").val().trim();
   
     // Creates local "temporary" object for holding employee data
     var newTrain = {
@@ -52,7 +52,7 @@
     $("#train-name-input").val("");
     $("#destination-input").val("");
     $("#first-train-input").val("");
-    $("#train-freq").val("");
+    $("#freq-input").val("");
   });
   
   // 3. Create Firebase event for adding employee to the database and a row in the html when a user adds an entry
@@ -66,27 +66,43 @@
     var trainFirst = childSnapshot.val().first;
     var trainFreq = childSnapshot.val().frequency;
   
-    // Employee Info
+    // Train Info
     console.log(trainName);
     console.log(trainDest);
     console.log(trainFirst);
     console.log(trainFreq);
-  
-    // Prettify the employee first
+    
+    // Prettify the train data first
     var trainFirstPretty = moment.unix(trainFirst).format("HH:mm");
+    console.log("first train time that has been entered is " + trainFirstPretty);
+
+    // what's the current time?
+    var currentTime = moment();
+    console.log("current time is " + currentTime);
   
-    // Calculate the months worked using hardcore math
+    // Calculate the minutes til next train using hardcore math
     // To calculate the months worked
     var mintilnexttrain = moment().diff(moment(trainFirst, "X"), "minutes");
-    console.log(mintilnexttrain);
+    console.log("there are " + mintilnexttrain + "minutes til the next train");
   
-    // Calculate the total billed frequency
+    // Calculate the frequency
     var nextTrain = mintilnexttrain * trainFreq;
     console.log(nextTrain);
   
+    // minutes from midnight, thanks stackoverflow
+    var makecurrenttimereadable = moment.utc().startOf('day').add(currentTime, 'minutes').format('hh:mm A');
+    console.log("current time: "+ makecurrenttimereadable);
+    var maketrainFirstreadable = moment.utc().startOf('day').add(trainFirst, 'minutes').format('hh:mm A');
+    console.log("first train: "+ maketrainFirstreadable);
+    var makemintilnexttrainreadable = moment.utc().startOf('day').add(mintilnexttrain, 'minutes').format('hh:mm A');
+    console.log("min til next train: "+ makemintilnexttrainreadable);
+    var makenexttrainreadable = moment.utc().startOf('day').add(nextTrain, 'minutes').format('hh:mm A');
+    console.log("next train: "+ makenexttrainreadable);
+
+
     // Add each train's data into the table
     $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDest + "</td><td>" +
-    trainFirstPretty + "</td><td>" + mintilnexttrain + "</td><td>" + trainFreq + "</td><td>" + nextTrain + "</td></tr>");
+    maketrainFirstreadable + "</td><td>" + makemintilnexttrainreadable + "</td><td>" + trainFreq + "</td><td>" + makenexttrainreadable + "</td></tr>");
   });
   
   // Example Time Math
