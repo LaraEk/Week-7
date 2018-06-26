@@ -3,6 +3,11 @@
 //<!-- NOTE: BORROWING FROM TIMESHEET EXERCISE TO BASE ON -->
 
 
+var thisisthetime = moment();
+var thisisnow = moment.utc().startOf('day').add(thisisthetime, 'minutes').format('hh:mm A');
+$("#currenttimebox").html("The current time is:<br>" + thisisnow);
+
+
 // 1. Initialize Firebase
 
   // Initialize Firebase
@@ -81,7 +86,6 @@
     console.log("current time is " + currentTime);
   
     // Calculate the minutes til next train using hardcore math
-    // To calculate the months worked
     var mintilnexttrain = moment().diff(moment(trainFirst, "X"), "minutes");
     console.log("there are " + mintilnexttrain + "minutes til the next train");
   
@@ -94,15 +98,16 @@
     console.log("current time: "+ makecurrenttimereadable);
     var maketrainFirstreadable = moment.utc().startOf('day').add(trainFirst, 'minutes').format('hh:mm A');
     console.log("first train: "+ maketrainFirstreadable);
-    var makemintilnexttrainreadable = moment.utc().startOf('day').add(mintilnexttrain, 'minutes').format('hh:mm A');
-    console.log("min til next train: "+ makemintilnexttrainreadable);
+    // var makemintilnexttrainreadable = moment.utc().startOf('day').add(mintilnexttrain, 'minutes').format('hh:mm A');
+    // console.log("min til next train: "+ makemintilnexttrainreadable);
     var makenexttrainreadable = moment.utc().startOf('day').add(nextTrain, 'minutes').format('hh:mm A');
     console.log("next train: "+ makenexttrainreadable);
 
 
     // Add each train's data into the table
     $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDest + "</td><td>" +
-    maketrainFirstreadable + "</td><td>" + makemintilnexttrainreadable + "</td><td>" + trainFreq + "</td><td>" + makenexttrainreadable + "</td></tr>");
+    maketrainFirstreadable + "</td><td>" + trainFreq + "</td><td>" + mintilnexttrain + "</td><td>" + makenexttrainreadable + "</td></tr>");
+
   });
   
   // Example Time Math
