@@ -3,9 +3,10 @@
 //<!-- NOTE: BORROWING FROM TIMESHEET EXERCISE TO BASE ON -->
 
 
-var thisisthetime = moment();
-var thisisnow = moment.utc().startOf('day').add(thisisthetime, 'minutes').format('hh:mm A');
-$("#currenttimebox").html("The current time is:<br>" + thisisnow);
+
+var nownow = moment().format("HH:mm a");
+console.log("this is nownow" + nownow);
+$("#currenttimebox").html("The current time is:<br>" + nownow);
 
 
 // 1. Initialize Firebase
@@ -77,9 +78,9 @@ $("#currenttimebox").html("The current time is:<br>" + thisisnow);
     console.log(trainFirst);
     console.log(trainFreq);
     
-    // Prettify the train data first
-    var trainFirstPretty = moment.unix(trainFirst).format("HH:mm");
-    console.log("first train time that has been entered is " + trainFirstPretty);
+    // // Prettify the train data first
+    // var trainFirstPretty = moment.unix(trainFirst).format("HH:mm");
+    // console.log("first train time that has been entered is " + trainFirstPretty);
 
     // what's the current time?
     var currentTime = moment();
