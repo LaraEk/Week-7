@@ -1,9 +1,3 @@
-//<!-- NOTE: BORROWING FROM TIMESHEET EXERCISE TO BASE ON -->
-//<!-- NOTE: BORROWING FROM TIMESHEET EXERCISE TO BASE ON -->
-//<!-- NOTE: BORROWING FROM TIMESHEET EXERCISE TO BASE ON -->
-
-
-
 var nownow = moment().format("HH:mm a");
 console.log("this is nownow" + nownow);
 $("#currenttimebox").html("The current time is:<br>" + nownow);
@@ -32,6 +26,7 @@ $("#currenttimebox").html("The current time is:<br>" + nownow);
     var trainName = $("#train-name-input").val().trim();
     var trainDest = $("#destination-input").val().trim();
     var trainFirst = moment($("#first-train-input").val().trim(), "DD/MM/YY").format("X");
+//    var trainFirst = moment($("#first-train-input").val().trim(), "HH:mm a").format("X");
     var trainFreq = $("#freq-input").val().trim();
   
     // Creates local "temporary" object for holding employee data
@@ -78,15 +73,15 @@ $("#currenttimebox").html("The current time is:<br>" + nownow);
     console.log(trainFirst);
     console.log(trainFreq);
     
-    // // Prettify the train data first
-    // var trainFirstPretty = moment.unix(trainFirst).format("HH:mm");
-    // console.log("first train time that has been entered is " + trainFirstPretty);
-
     // what's the current time?
-    var currentTime = moment();
-    console.log("current time is " + currentTime);
+    console.log(nownow);
+    console.log("current time is " + nownow);
   
-    // Calculate the minutes til next train using hardcore math
+    // when was the first train?
+    console.log("first train is" + trainFirst);
+    var firsttrainreadable = moment(trainFirst).format("HH:mm a");
+    console.log("first train is actually" + firsttrainreadable);
+    
     var mintilnexttrain = moment().diff(moment(trainFirst, "X"), "minutes");
     console.log("there are " + mintilnexttrain + "minutes til the next train");
   
@@ -94,9 +89,11 @@ $("#currenttimebox").html("The current time is:<br>" + nownow);
     var nextTrain = mintilnexttrain * trainFreq;
     console.log(nextTrain);
   
+    // Calculate the minutes til next train using hardcore math
+
     // minutes from midnight, thanks stackoverflow
-    var makecurrenttimereadable = moment.utc().startOf('day').add(currentTime, 'minutes').format('hh:mm A');
-    console.log("current time: "+ makecurrenttimereadable);
+    // var makecurrenttimereadable = moment.utc().startOf('day').add(nownow, 'minutes').format('hh:mm A');
+    // console.log("current time: "+ makecurrenttimereadable);
     var maketrainFirstreadable = moment.utc().startOf('day').add(trainFirst, 'minutes').format('hh:mm A');
     console.log("first train: "+ maketrainFirstreadable);
     // var makemintilnexttrainreadable = moment.utc().startOf('day').add(mintilnexttrain, 'minutes').format('hh:mm A');
@@ -104,6 +101,11 @@ $("#currenttimebox").html("The current time is:<br>" + nownow);
     var makenexttrainreadable = moment.utc().startOf('day').add(nextTrain, 'minutes').format('hh:mm A');
     console.log("next train: "+ makenexttrainreadable);
 
+
+    // var nownow = moment().format("HH:mm a");
+    // console.log("this is nownow" + nownow);
+    // $("#currenttimebox").html("The current time is:<br>" + nownow);
+    
 
     // Add each train's data into the table
     $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDest + "</td><td>" +
