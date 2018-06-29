@@ -86,8 +86,6 @@ $("#currenttimebox").html("The current time is:<br>" + nownow);
     var differenceInTimes = moment().diff(trainTime, "minutes");
     console.log("the difference in time is " + differenceInTimes);
     var tRemainder = differenceInTimes % trainFreq;
-    var tRemainderLeft = (tRemainder / 60)
-    console.log(tRemainderLeft);
     tMinutes = trainFreq - tRemainder;
     // To calculate the arrival time, add the tMinutes to the current time
     tArrival = moment().add(tMinutes, "m").format("hh:mm A");
@@ -95,26 +93,13 @@ $("#currenttimebox").html("The current time is:<br>" + nownow);
 
     // Add each train's data into the table
     $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDest + "</td><td>" +
-    trainFirst + "</td><td>" + trainFreq + "</td><td>" + tRemainderLeft + "</td><td>" + tArrival + "</td></tr>");
+    trainFirst + "</td><td>" + trainFreq + "</td><td>" + tArrival + "</td><td>" + "<input type='submit' value='Remove' class='remove-train btn'>" + "</td></tr>");
 
+        // When the "remove" button is clicked, it will delete/remove that particular row
+        $(".remove-train").click(function(){
+          $(this).parents('tr').first().remove();
+        });
+    
   });
 
-    // // when was the first train?
-    // console.log("first train is" + trainFirst);
-    // var firsttrainreadable = moment(trainFirst).format("HH:mm");
-    // console.log("first train is actually" + firsttrainreadable);
-    
-    // var mintilnexttrain = moment().diff(moment(trainFirst, "X"), "minutes");
-    // console.log("there are " + mintilnexttrain + "minutes til the next train");
-  
-    // // Calculate the frequency
-    // var nextTrain = mintilnexttrain * trainFreq;
-    // console.log(nextTrain);
-  
-    // // Calculate the minutes til next train using hardcore math
 
-    // // minutes from midnight, thanks stackoverflow
-    // var maketrainFirstreadable = moment.utc().startOf('day').add(trainFirst, 'minutes').format('hh:mm A');
-    // console.log("first train: "+ maketrainFirstreadable);
-    // var makenexttrainreadable = moment.utc().startOf('day').add(nextTrain, 'minutes').format('hh:mm A');
-    // console.log("next train: "+ makenexttrainreadable);
