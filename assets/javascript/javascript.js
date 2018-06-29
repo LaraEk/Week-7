@@ -25,8 +25,9 @@ $("#currenttimebox").html("The current time is:<br>" + nownow);
     // Grabs user input
     var trainName = $("#train-name-input").val().trim();
     var trainDest = $("#destination-input").val().trim();
-    var trainFirst = moment($("#first-train-input").val().trim(), "DD/MM/YY").format("X");
+//    var trainFirst = moment($("#first-train-input").val().trim(), "DD/MM/YY").format("X");
 //    var trainFirst = moment($("#first-train-input").val().trim(), "HH:mm a").format("X");
+    var trainFirst = $("#first-train-input").val().trim();
     var trainFreq = $("#freq-input").val().trim();
   
     // Creates local "temporary" object for holding employee data
@@ -77,47 +78,43 @@ $("#currenttimebox").html("The current time is:<br>" + nownow);
     console.log(nownow);
     console.log("current time is " + nownow);
   
-    // when was the first train?
-    console.log("first train is" + trainFirst);
-    var firsttrainreadable = moment(trainFirst).format("HH:mm a");
-    console.log("first train is actually" + firsttrainreadable);
-    
-    var mintilnexttrain = moment().diff(moment(trainFirst, "X"), "minutes");
-    console.log("there are " + mintilnexttrain + "minutes til the next train");
-  
-    // Calculate the frequency
-    var nextTrain = mintilnexttrain * trainFreq;
-    console.log(nextTrain);
-  
-    // Calculate the minutes til next train using hardcore math
+    var timeArray = trainFirst.split(":");
+    var trainTime = moment().hours(timeArray[0]).minutes(timeArray[1]);
+    console.log("timeArray is " + timeArray);
+    console.log("trainTime is " + trainTime);
 
-    // minutes from midnight, thanks stackoverflow
-    // var makecurrenttimereadable = moment.utc().startOf('day').add(nownow, 'minutes').format('hh:mm A');
-    // console.log("current time: "+ makecurrenttimereadable);
-    var maketrainFirstreadable = moment.utc().startOf('day').add(trainFirst, 'minutes').format('hh:mm A');
-    console.log("first train: "+ maketrainFirstreadable);
-    // var makemintilnexttrainreadable = moment.utc().startOf('day').add(mintilnexttrain, 'minutes').format('hh:mm A');
-    // console.log("min til next train: "+ makemintilnexttrainreadable);
-    var makenexttrainreadable = moment.utc().startOf('day').add(nextTrain, 'minutes').format('hh:mm A');
-    console.log("next train: "+ makenexttrainreadable);
-
-
-    // var nownow = moment().format("HH:mm a");
-    // console.log("this is nownow" + nownow);
-    // $("#currenttimebox").html("The current time is:<br>" + nownow);
-    
+    var differenceInTimes = moment().diff(trainTime, "minutes");
+    console.log("the difference in time is " + differenceInTimes);
+    var tRemainder = differenceInTimes % trainFreq;
+    var tRemainderLeft = (tRemainder / 60)
+    console.log(tRemainderLeft);
+    tMinutes = trainFreq - tRemainder;
+    // To calculate the arrival time, add the tMinutes to the current time
+    tArrival = moment().add(tMinutes, "m").format("hh:mm A");
+    console.log(tArrival);
 
     // Add each train's data into the table
     $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDest + "</td><td>" +
-    maketrainFirstreadable + "</td><td>" + trainFreq + "</td><td>" + mintilnexttrain + "</td><td>" + makenexttrainreadable + "</td></tr>");
+    trainFirst + "</td><td>" + trainFreq + "</td><td>" + tRemainderLeft + "</td><td>" + tArrival + "</td></tr>");
 
   });
+
+    // // when was the first train?
+    // console.log("first train is" + trainFirst);
+    // var firsttrainreadable = moment(trainFirst).format("HH:mm");
+    // console.log("first train is actually" + firsttrainreadable);
+    
+    // var mintilnexttrain = moment().diff(moment(trainFirst, "X"), "minutes");
+    // console.log("there are " + mintilnexttrain + "minutes til the next train");
   
-  // Example Time Math
-  // -----------------------------------------------------------------------------
-  // Assume Employee first date of January 1, 2015
-  // Assume current date is March 1, 2016
+    // // Calculate the frequency
+    // var nextTrain = mintilnexttrain * trainFreq;
+    // console.log(nextTrain);
   
-  // We know that this is 15 months.
-  // Now we will create code in moment.js to confirm that any attempt we use meets this test case
-  
+    // // Calculate the minutes til next train using hardcore math
+
+    // // minutes from midnight, thanks stackoverflow
+    // var maketrainFirstreadable = moment.utc().startOf('day').add(trainFirst, 'minutes').format('hh:mm A');
+    // console.log("first train: "+ maketrainFirstreadable);
+    // var makenexttrainreadable = moment.utc().startOf('day').add(nextTrain, 'minutes').format('hh:mm A');
+    // console.log("next train: "+ makenexttrainreadable);
