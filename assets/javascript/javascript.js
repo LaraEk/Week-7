@@ -25,12 +25,10 @@ $("#currenttimebox").html("The current time is:<br>" + nownow);
     // Grabs user input
     var trainName = $("#train-name-input").val().trim();
     var trainDest = $("#destination-input").val().trim();
-//    var trainFirst = moment($("#first-train-input").val().trim(), "DD/MM/YY").format("X");
-//    var trainFirst = moment($("#first-train-input").val().trim(), "HH:mm a").format("X");
     var trainFirst = $("#first-train-input").val().trim();
     var trainFreq = $("#freq-input").val().trim();
   
-    // Creates local "temporary" object for holding employee data
+    // Creates local "temporary" object for holding train data
     var newTrain = {
       trainname: trainName,
       destination: trainDest,
@@ -57,12 +55,12 @@ $("#currenttimebox").html("The current time is:<br>" + nownow);
     $("#freq-input").val("");
   });
   
-  // 3. Create Firebase event for adding employee to the database and a row in the html when a user adds an entry
+  // 3. Create Firebase event for adding train to the database and a row in the html when a user adds an entry
   database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   
     console.log(childSnapshot.val());
   
-    // Store everything into a variable.
+    // Store everything into its own variable.
     var trainName = childSnapshot.val().trainname;
     var trainDest = childSnapshot.val().destination;
     var trainFirst = childSnapshot.val().first;
@@ -95,10 +93,10 @@ $("#currenttimebox").html("The current time is:<br>" + nownow);
     $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDest + "</td><td>" +
     trainFirst + "</td><td>" + trainFreq + "</td><td>" + tArrival + "</td><td>" + "<input type='submit' value='Remove' class='remove-train btn'>" + "</td></tr>");
 
-        // When the "remove" button is clicked, it will delete/remove that particular row
-        $(".remove-train").click(function(){
-          $(this).parents('tr').first().remove();
-        });
+    // When the "remove" button is clicked, it will delete/remove that particular row
+    $(".remove-train").click(function(){
+      $(this).parents('tr').first().remove();
+    });
     
   });
 

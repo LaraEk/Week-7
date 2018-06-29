@@ -66,3 +66,6 @@
     // console.log("first train: "+ maketrainFirstreadable);
     // var makenexttrainreadable = moment.utc().startOf('day').add(nextTrain, 'minutes').format('hh:mm A');
     // console.log("next train: "+ makenexttrainreadable);
+
+    //    var trainFirst = moment($("#first-train-input").val().trim(), "DD/MM/YY").format("X");
+//    var trainFirst = moment($("#first-train-input").val().trim(), "HH:mm a").format("X");
